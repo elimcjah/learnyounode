@@ -1,10 +1,12 @@
 var fs = require('fs');
+const path = require('path');
 
-// create variable from passed in argument(filename)
-fs.readFile(process.argv[2], 'utf8', function(err, content){
-   if (err) {
-    return console.log(err)
-  }
-
-  console.log(content.split('\n').length -1);
+fs.readdir(process.argv[2], function (err, list) {
+    if(err){
+    return err;
+    }
+  list.forEach(function (file) {
+    if (path.extname(file) === '.' + process.argv[3])
+      console.log(file)
+  });
 });
